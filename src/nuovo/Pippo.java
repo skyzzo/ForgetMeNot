@@ -10,6 +10,6 @@ package nuovo;
  *
  * @author daniele
  */
-public class Prova {
+public class Pippo {
     
 }
