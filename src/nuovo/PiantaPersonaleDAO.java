@@ -19,7 +19,7 @@ public class PiantaPersonaleDAO {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(INSERT_SQL);
             pstmt.setString(1, piantaPersonale.getNome());
-            pstmt.setString(2, piantaPersonale.getUtente().getUsername());
+            pstmt.setString(2, piantaPersonale.getUtente());
             pstmt.setString(3, piantaPersonale.getFoto());
             pstmt.setString(4, piantaPersonale.getPosizione());
             pstmt.executeUpdate();
@@ -63,7 +63,7 @@ public class PiantaPersonaleDAO {
             pstmt.setString(1, piantaPersonale.getNome());
             rs=pstmt.executeQuery();
             rs.next();
-            piantaPersonale.setUtente((Utente) rs.getObject("UTENTE"));
+            piantaPersonale.setUtente(rs.getString("UTENTE"));
             piantaPersonale.setFoto(rs.getString("FOTO"));
             piantaPersonale.setPosizione(rs.getString("POSIZIONE"));
         }
@@ -103,7 +103,7 @@ public class PiantaPersonaleDAO {
         con = ConnectionManager.getConnection();
         pstmt = con.prepareStatement(UPDATE_BY_NAME);
         pstmt.setString(1,piantaPersonale.getNome());
-        pstmt.setString(2, piantaPersonale.getUtente().getUsername());
+        pstmt.setString(2, piantaPersonale.getUtente());
         pstmt.setString(3, piantaPersonale.getFoto());
         pstmt.setString(4, piantaPersonale.getPosizione());
         pstmt.executeUpdate();

@@ -17,24 +17,24 @@ import java.sql.SQLException;
  */
 public class Origine implements Serializable {
 
-    public void setPianta_default(PiantaDefault pianta_default) {
+    public void setPianta_default(String pianta_default) {
         this.pianta_default = pianta_default;
     }
 
-    public void setLuogo(Luogo luogo) {
+    public void setLuogo(String luogo) {
         this.luogo = luogo;
     }
 
-    public PiantaDefault getPianta_default() {
+    public String getPianta_default() {
         return pianta_default;
     }
 
-    public Luogo getLuogo() {
+    public String getLuogo() {
         return luogo;
     }
     
 
-    public Origine(PiantaDefault pianta_default, Luogo luogo) {
+    public Origine(String pianta_default, String luogo) {
         this.pianta_default = pianta_default;
         this.luogo = luogo;
     }
@@ -55,8 +55,8 @@ public class Origine implements Serializable {
         OrigineDAO.delete(this);
     }
     
-    private PiantaDefault pianta_default;
-    private Luogo luogo;
+    private String pianta_default;
+    private String luogo;
     
            
 }

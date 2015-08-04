@@ -12,29 +12,38 @@ package nuovo;
  */
 public class Contiene {
 
-    public Utente getUtente() {
+    public String getUtente() {
         return utente;
     }
+    
+    public String getPianta_personale() {
+        return pianta_personale;
+    }
 
-    public PiantaDefault getPianta_default() {
+    public String getPianta_default() {
         return pianta_default;
     }
 
-    public void setUtente(Utente utente) {
+    public void setUtente(String utente) {
         this.utente = utente;
     }
 
-    public void setPianta_default(PiantaDefault pianta_default) {
+    public void setPianta_default(String pianta_default) {
         this.pianta_default = pianta_default;
     }
-
-    public Contiene(Utente utente, PiantaDefault pianta_default) {
-        this.utente = utente;
-        this.pianta_default = pianta_default;
-    }
-
-    private Utente utente;
-    private PiantaDefault pianta_default;
     
+    public void setPianta_personale(String pianta_personale) {
+        this.pianta_personale = pianta_personale;
+    }
+
+    public Contiene(String utente, String pianta_default, String pianta_personale) {
+        this.utente = utente;
+        this.pianta_default = pianta_default;
+        this.pianta_personale=pianta_personale;
+    }
+
+    private String utente;
+    private String pianta_default;
+    private String pianta_personale;
     
 }

@@ -28,8 +28,8 @@ public class OrigineDAO {
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(INSERT_SQL);
-            pstmt.setString(1, origine.getPianta_default().getNome());
-            pstmt.setString(2, origine.getLuogo().getNome());
+            pstmt.setString(1, origine.getPianta_default());
+            pstmt.setString(2, origine.getLuogo());
             pstmt.executeUpdate();
         }
         catch(ClassNotFoundException ex){
@@ -67,10 +67,10 @@ public class OrigineDAO {
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(FIND_BY_NAME);
-            pstmt.setString(1, origine.getPianta_default().getNome());
+            pstmt.setString(1, origine.getPianta_default());
             rs=pstmt.executeQuery();
             rs.next();
-            origine.setLuogo((Luogo)rs.getObject("LUOGO"));
+            origine.setLuogo(rs.getString("LUOGO"));
         }
          catch(ClassNotFoundException ex){
             throw new MyException("Errore: DRIVER NON TROVATO");
@@ -108,8 +108,8 @@ public class OrigineDAO {
     try {
         con = ConnectionManager.getConnection();
         pstmt = con.prepareStatement(UPDATE_BY_NAME);
-        pstmt.setString(1, origine.getPianta_default().getNome());
-        pstmt.setString(2, origine.getLuogo().getNome());
+        pstmt.setString(1, origine.getPianta_default());
+        pstmt.setString(2, origine.getLuogo());
         pstmt.executeUpdate();
     }
     catch(ClassNotFoundException ex){
@@ -145,7 +145,7 @@ public class OrigineDAO {
         try {
             con=ConnectionManager.getConnection();
             pstmt = con.prepareStatement(DELETE_BY_NAME);
-            pstmt.setString(1, origine.getPianta_default().getNome());
+            pstmt.setString(1, origine.getPianta_default());
             pstmt.executeUpdate();
         }
         catch(ClassNotFoundException ex){

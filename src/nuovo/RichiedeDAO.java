@@ -28,8 +28,8 @@ public class RichiedeDAO {
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(INSERT_SQL);
-            pstmt.setString(1, richiede.getFertilizzante().getNome());
-            pstmt.setString(2, richiede.getPianta_default().getNome());
+            pstmt.setString(1, richiede.getFertilizzante());
+            pstmt.setString(2, richiede.getPianta_default());
             pstmt.setString(3, richiede.getTempo_fertilizzante());
             pstmt.executeUpdate();
         }
@@ -68,8 +68,8 @@ public class RichiedeDAO {
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(FIND_BY_NAME);
-            pstmt.setString(1, richiede.getFertilizzante().getNome());
-            pstmt.setString(2, richiede.getPianta_default().getNome());
+            pstmt.setString(1, richiede.getFertilizzante());
+            pstmt.setString(2, richiede.getPianta_default());
             rs=pstmt.executeQuery();
             rs.next();
             richiede.setTempo_fertilizzante(rs.getString("TEMPO_FERTILIZZANTE"));
@@ -110,8 +110,8 @@ public class RichiedeDAO {
     try {
         con = ConnectionManager.getConnection();
         pstmt = con.prepareStatement(UPDATE_BY_NAME);
-        pstmt.setString(1, richiede.getFertilizzante().getNome());
-        pstmt.setString(2, richiede.getPianta_default().getNome());
+        pstmt.setString(1, richiede.getFertilizzante());
+        pstmt.setString(2, richiede.getPianta_default());
         pstmt.setString(3, richiede.getTempo_fertilizzante());
         pstmt.executeUpdate();
     }
@@ -148,8 +148,8 @@ public class RichiedeDAO {
         try {
             con=ConnectionManager.getConnection();
             pstmt = con.prepareStatement(DELETE_BY_NAME);
-            pstmt.setString(1, richiede.getFertilizzante().getNome());
-            pstmt.setString(2, richiede.getPianta_default().getNome());
+            pstmt.setString(1, richiede.getFertilizzante());
+            pstmt.setString(2, richiede.getPianta_default());
             pstmt.executeUpdate();
         }
         catch(ClassNotFoundException ex){
