@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PiantaPersonaleDao {
+public class PiantaPersonaleDAO {
   
-  private PiantaPersonale() {}
+  private PiantaPersonaleDAO() {}
   
   private static final String INSERT_SQL="INSERT INTO PIANTAPERSONALE VALUES (?, ?, ?, ?)";
   
@@ -18,10 +18,10 @@ public class PiantaPersonaleDao {
          try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(INSERT_SQL);
-            pstmt.setString(1, PiantaPersonale.getNome());
-            pstmt.setString(2, PiantaPersonale.getUtente().getUsername());
-            pstmt.setString(3, PiantaPersonale.getFoto());
-            pstmt.setString(4, PiantaPersonale.getPosizione());
+            pstmt.setString(1, piantaPersonale.getNome());
+            pstmt.setString(2, piantaPersonale.getUtente().getUsername());
+            pstmt.setString(3, piantaPersonale.getFoto());
+            pstmt.setString(4, piantaPersonale.getPosizione());
             pstmt.executeUpdate();
         }
          catch(ClassNotFoundException ex){
@@ -52,18 +52,18 @@ public class PiantaPersonaleDao {
         }
     }
     
-     private static final String FIND_BY_NAME ="SELECT * FROM PIANTAPERSONA WHERE NOME = ?";
-    public static void load(Utente utente) throws MyException {
+     private static final String FIND_BY_NAME ="SELECT * FROM PIANTAPERSONALE WHERE NOME = ?";
+    public static void load(PiantaPersonale piantaPersonale) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
         ResultSet rs=null;
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(FIND_BY_NAME);
-            pstmt.setString(1, utente.getNome());
+            pstmt.setString(1, piantaPersonale.getNome());
             rs=pstmt.executeQuery();
             rs.next();
-            piantaPersonale.SetUtente(rs.getString("qui che ci va?")); //cosa ci va in questo campo?
+            piantaPersonale.setUtente((Utente) rs.getObject("UTENTE"));
             piantaPersonale.setFoto(rs.getString("FOTO"));
             piantaPersonale.setPosizione(rs.getString("POSIZIONE"));
         }
@@ -103,7 +103,7 @@ public class PiantaPersonaleDao {
         con = ConnectionManager.getConnection();
         pstmt = con.prepareStatement(UPDATE_BY_NAME);
         pstmt.setString(1,piantaPersonale.getNome());
-        pstmt.setString(2, piantaPersonale.getUtente.getUsername());
+        pstmt.setString(2, piantaPersonale.getUtente().getUsername());
         pstmt.setString(3, piantaPersonale.getFoto());
         pstmt.setString(4, piantaPersonale.getPosizione());
         pstmt.executeUpdate();
@@ -134,7 +134,7 @@ public class PiantaPersonaleDao {
         }
     }
     
-    private static final String DELETE_BY_NAME="DELETE * FROM PIANTAOERSINALE WHERE NOME= ?";
+    private static final String DELETE_BY_NAME="DELETE * FROM PIANTAPERSONALE WHERE NOME= ?";
     public static void delete(PiantaPersonale piantaPersonale) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
