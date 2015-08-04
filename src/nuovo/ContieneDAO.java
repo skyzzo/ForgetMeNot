@@ -9,7 +9,7 @@ public class ContieneDAO {
     
     private ContieneDAO() {}
     
-    private static final String INSERT_SQL="INSERT INTO ORIGINE VALUES (?, ?)";
+    private static final String INSERT_SQL="INSERT INTO CONTIENE VALUES (?, ?, ?)";
     
         public static void insert(Contiene contiene) throws MyException {
         Connection con=null;
@@ -18,9 +18,9 @@ public class ContieneDAO {
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(INSERT_SQL);
-            pstmt.setString(1, contiene.getUtente());
-            pstmt.setString(2, contiene.getPianta_default());
-            pstmt.setString(3, contiene.getPianta_personale());
+            pstmt.setString(1, contiene.getNome());
+            pstmt.setString(2, contiene.getUtente());
+            pstmt.setString(3, contiene.getPianta_default());
             pstmt.executeUpdate();
         }
         
@@ -50,7 +50,7 @@ public class ContieneDAO {
         }
     }
     
-    private static final String FIND_BY_NAME ="SELECT * FROM CONTIENE WHERE UTENTE = ?";   //VEDI SE QUESTO VA BENE
+    private static final String FIND_BY_NAME ="SELECT * FROM CONTIENE WHERE NOME = ? AND UTENTE=? ";   
     public static void load(Contiene contiene) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
@@ -58,11 +58,11 @@ public class ContieneDAO {
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(FIND_BY_NAME);
-            pstmt.setString(1, contiene.getUtente());
+            pstmt.setString(1, contiene.getNome());
+            pstmt.setString(2, contiene.getUtente());
             rs=pstmt.executeQuery();
             rs.next();
             contiene.setPianta_default(rs.getString("PIANTA_DEFAULT"));
-            contiene.setPianta_personale(rs.getString("PIANTA_PERSONALE"));
         }
         catch(ClassNotFoundException ex){
             throw new MyException("Errore: DRIVER NON TROVATO");
@@ -91,7 +91,7 @@ public class ContieneDAO {
         }
     }
     
-     private static final String UPDATE_BY_NAME = "UPDATE CONTIENE SET UTENTE=?,PIANTA_DEFAULT=?,PIANTA_PERSONALE=?";
+     private static final String UPDATE_BY_NAME = "UPDATE CONTIENE SET NOME=?,UTENTE=?,PIANTA_DEFAULT=?";
     public static void update(Contiene contiene) throws MyException {
     Connection con=null;
     PreparedStatement pstmt=null;
@@ -99,9 +99,9 @@ public class ContieneDAO {
     try {
         con = ConnectionManager.getConnection();
         pstmt = con.prepareStatement(UPDATE_BY_NAME);
-        pstmt.setString(1, contiene.getUtente());
-        pstmt.setString(2, contiene.getPianta_default());
-        pstmt.setString(3, contiene.getPianta_personale());
+        pstmt.setString(1, contiene.getNome());
+        pstmt.setString(2, contiene.getUtente());
+        pstmt.setString(3, contiene.getPianta_default());
         pstmt.executeUpdate();
     }
      catch(ClassNotFoundException ex){
@@ -130,14 +130,15 @@ public class ContieneDAO {
         }
     }
     
-    private static final String DELETE_BY_NAME="DELETE * FROM CONTIENE WHERE UTENTE= ?"; //CONTROLLA QUI PLEASE
+    private static final String DELETE_BY_NAME="DELETE * FROM CONTIENE WHERE NOME= ? AND UTENTE=? "; 
     public static void delete(Contiene contiene) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
          try {
             con=ConnectionManager.getConnection();
             pstmt = con.prepareStatement(DELETE_BY_NAME);
-            pstmt.setString(1, contiene.getUtente());
+            pstmt.setString(1, contiene.getNome());
+            pstmt.setString(2, contiene.getUtente());
             pstmt.executeUpdate();
         }
         catch(ClassNotFoundException ex){
