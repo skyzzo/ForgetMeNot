@@ -6,11 +6,14 @@
 
 package nuovo;
 
+import java.io.Serializable;
+import java.sql.SQLException;
+
 /**
  *
  * @author daniele
  */
-public class Luogo {
+public class Luogo implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -49,6 +52,23 @@ public class Luogo {
         this.quantita_acqua = quantita_acqua;
         this.umidita = umidita;
         this.intervallo_acqua = intervallo_acqua;
+    }
+    
+    
+     public void leggiDatidaDB() throws SQLException, ClassNotFoundException, MyException {
+        LuogoDAO.load(this);
+    }
+    
+    public void inserisciDatisuDB() throws SQLException, ClassNotFoundException, MyException {
+        LuogoDAO.insert(this);
+    }
+    
+    public void aggiornaDatisuDB() throws SQLException, ClassNotFoundException, MyException {
+        LuogoDAO.update(this);
+    }
+    
+    public void cancellaDatisuDB() throws SQLException, ClassNotFoundException, MyException {
+        LuogoDAO.delete(this);
     }
     
     private String nome;

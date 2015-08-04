@@ -6,13 +6,39 @@
 
 package nuovo;
 
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.Objects;
+
 
 
 /**
  *
  * @author daniele
  */
-public class Fertilizzante {
+public class Fertilizzante implements Serializable {
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Fertilizzante other = (Fertilizzante) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -34,6 +60,22 @@ public class Fertilizzante {
     public Fertilizzante(String nome, String descrizione) {
         this.nome = nome;
         this.descrizione = descrizione;
+    }
+    
+    public void leggiDatidaDB() throws SQLException, ClassNotFoundException, MyException {
+        FertilizzanteDAO.load(this);
+    }
+    
+    public void inserisciDatisuDB() throws SQLException, ClassNotFoundException, MyException {
+        FertilizzanteDAO.insert(this);
+    }
+    
+    public void aggiornaDatisuDB() throws SQLException, ClassNotFoundException, MyException {
+        FertilizzanteDAO.update(this);
+    }
+    
+    public void cancellaDatisuDB() throws SQLException, ClassNotFoundException, MyException {
+        FertilizzanteDAO.delete(this);
     }
     
     private String nome;
