@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package nuovo;
+package nuovo;      /*COMMENTO ALL'INIZIO*/
 
 import java.io.Serializable;
 import java.sql.SQLException;
