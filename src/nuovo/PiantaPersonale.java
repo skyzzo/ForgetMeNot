@@ -46,7 +46,7 @@ public class PiantaPersonale implements Serializable {
         this.nome = nome;
     }
 
-    public void setUtente(Utente utente) {
+    public void setUtente(String utente) {
         this.utente = utente;
     }
 
@@ -62,7 +62,7 @@ public class PiantaPersonale implements Serializable {
         return nome;
     }
 
-    public Utente getUtente() {
+    public String getUtente() {
         return utente;
     }
 
@@ -74,7 +74,7 @@ public class PiantaPersonale implements Serializable {
         return posizione;
     }
 
-    public PiantaPersonale(String nome, Utente utente, String foto, String posizione) {
+    public PiantaPersonale(String nome, String utente, String foto, String posizione) {
         this.nome = nome;
         this.utente = utente;
         this.foto = foto;
@@ -82,7 +82,7 @@ public class PiantaPersonale implements Serializable {
     }
     
     private String nome;
-    private Utente utente;
+    private String utente;
     private String foto;
     private String posizione;
     

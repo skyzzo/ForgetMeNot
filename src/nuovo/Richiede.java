@@ -42,11 +42,11 @@ public class Richiede implements Serializable {
         return true;
     }
 
-    public void setFertilizzante(Fertilizzante fertilizzante) {
+    public void setFertilizzante(String fertilizzante) {
         this.fertilizzante = fertilizzante;
     }
 
-    public void setPianta_default(PiantaDefault pianta_default) {
+    public void setPianta_default(String pianta_default) {
         this.pianta_default = pianta_default;
     }
 
@@ -54,11 +54,11 @@ public class Richiede implements Serializable {
         this.tempo_fertilizzante = tempo_fertilizzante;
     }
 
-    public Fertilizzante getFertilizzante() {
+    public String getFertilizzante() {
         return fertilizzante;
     }
 
-    public PiantaDefault getPianta_default() {
+    public String getPianta_default() {
         return pianta_default;
     }
 
@@ -66,14 +66,14 @@ public class Richiede implements Serializable {
         return tempo_fertilizzante;
     }
 
-    public Richiede(Fertilizzante fertilizzante, PiantaDefault pianta_default, String tempo_fertilizzante) {
+    public Richiede(String fertilizzante, String pianta_default, String tempo_fertilizzante) {
         this.fertilizzante = fertilizzante;
         this.pianta_default = pianta_default;
         this.tempo_fertilizzante = tempo_fertilizzante;
     }
     
-    private Fertilizzante fertilizzante;
-    private PiantaDefault pianta_default;
+    private String fertilizzante;
+    private String pianta_default;
     private String tempo_fertilizzante;
     
     public void leggiDatidaDB() throws SQLException, ClassNotFoundException, MyException {

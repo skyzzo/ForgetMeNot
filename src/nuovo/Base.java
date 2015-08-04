@@ -19,7 +19,7 @@ public class Base {
     private static final String driver = "org.postgresql.Driver";
     private static final String url = "jdbc:postgresql://localhost/ForgetMeNot";
     private static final String user = "postgres";
-    private static final String password = "varicella";
+    private static final String password = "password";
     
      public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
@@ -40,7 +40,7 @@ public class Base {
         
         String url="jdbc:postgresql://localhost/ForgetMeNot";
         String login="postgres";
-        String password="varicella";
+        String password="password";
         
         Connection connection = null;
         
