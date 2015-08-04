@@ -6,13 +6,14 @@
 
 package nuovo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author daniele
  */
-public class Contiene {
+public class Contiene implements Serializable {
 
     @Override
     public int hashCode() {
