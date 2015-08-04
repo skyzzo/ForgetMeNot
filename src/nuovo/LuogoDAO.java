@@ -15,22 +15,23 @@ import java.sql.SQLException;
  *
  * @author daniele
  */
-public class UtenteDAO {
+public class LuogoDAO {
     
-    private UtenteDAO() {}
+    private LuogoDAO() {}
     
-    private static final String INSERT_SQL="INSERT INTO UTENTE VALUES (?, ?, ?)";
+    private static final String INSERT_SQL="INSERT INTO LUOGO VALUES (?, ?, ?, ?)";
     
-    public static void insert(Utente utente) throws MyException {
+    public static void insert(Luogo luogo) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
         
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(INSERT_SQL);
-            pstmt.setString(1, utente.getUsername());
-            pstmt.setString(2, utente.getEmail());
-            pstmt.setString(3, utente.getPassword());
+            pstmt.setString(1, luogo.getNome());
+            pstmt.setString(2, luogo.getQuantita_acqua());
+            pstmt.setString(3, luogo.getIntervallo_acqua());
+            pstmt.setString(4, luogo.getUmidita());
             pstmt.executeUpdate();
         }
         catch(ClassNotFoundException ex){
@@ -60,19 +61,20 @@ public class UtenteDAO {
     }
     
     //Comando SQL per l’ottenimento di una nuova istanza
-    private static final String FIND_BY_NAME ="SELECT * FROM UTENTE WHERE USERNAME = ?";
-    public static void load(Utente utente) throws MyException {
+    private static final String FIND_BY_NAME ="SELECT * FROM LUOGO WHERE NOME = ?";
+    public static void load(Luogo luogo) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
         ResultSet rs=null;
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(FIND_BY_NAME);
-            pstmt.setString(1, utente.getUsername());
+            pstmt.setString(1, luogo.getNome());
             rs=pstmt.executeQuery();
             rs.next();
-            utente.SetPassword(rs.getString("PASSWORD"));
-            utente.setEmail(rs.getString("EMAIL"));
+            luogo.setIntervallo_acqua("INTERVALLO_ACQUA");
+            luogo.setQuantita_acqua("QUANTITA_ACQUA");
+            luogo.setUmidita("UMIDITA");
         }
          catch(ClassNotFoundException ex){
             throw new MyException("Errore: DRIVER NON TROVATO");
@@ -102,17 +104,18 @@ public class UtenteDAO {
     }
     
     //Comando SQL per l’aggiornamento di una nuova istanza
-    private static final String UPDATE_BY_NAME = "UPDATE UTENTE SET USERNAME=?,EMAIL=?,PASSWORD=?";
-    public static void update(Utente utente) throws MyException {
+    private static final String UPDATE_BY_NAME = "UPDATE LUOGO SET NOME=?, QUANTITA_ACQUA=?, INTERVALLO_ACQUA=? , UMIDITA=?";
+    public static void update(Luogo luogo) throws MyException {
     Connection con=null;
     PreparedStatement pstmt=null;
     ResultSet rs=null;
     try {
         con = ConnectionManager.getConnection();
         pstmt = con.prepareStatement(UPDATE_BY_NAME);
-        pstmt.setString(1,utente.getUsername());
-        pstmt.setString(2, utente.getEmail());
-        pstmt.setString(3, utente.getPassword());
+        pstmt.setString(1, luogo.getNome());
+        pstmt.setString(2, luogo.getQuantita_acqua());
+        pstmt.setString(3, luogo.getIntervallo_acqua());
+        pstmt.setString(4, luogo.getUmidita());
         pstmt.executeUpdate();
     }
     catch(ClassNotFoundException ex){
@@ -141,14 +144,14 @@ public class UtenteDAO {
         }
     }
     
-    private static final String DELETE_BY_NAME="DELETE * FROM UTENTE WHERE USERNAME= ?";
-    public static void delete(Utente utente) throws MyException {
+    private static final String DELETE_BY_NAME="DELETE * FROM LUOGO WHERE NOME= ?";
+    public static void delete(Luogo luogo) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
         try {
             con=ConnectionManager.getConnection();
             pstmt = con.prepareStatement(DELETE_BY_NAME);
-            pstmt.setString(1, utente.getUsername());
+            pstmt.setString(1, luogo.getNome());
             pstmt.executeUpdate();
         }
         catch(ClassNotFoundException ex){

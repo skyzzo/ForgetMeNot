@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 
-package nuovo;
+package nuovo;      /*COMMENTO ALL'INIZIO*/
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Objects;
-
+// ciao danielito
 /**
  *
  * @author daniele
  */
-public class Utente implements Serializable{
+public class Utente implements Serializable {
 
     @Override
     public int hashCode() {
@@ -72,19 +72,19 @@ public class Utente implements Serializable{
         this.password=password;
     }
     
-    public void leggiDatidaDB() throws SQLException, ClassNotFoundException {
+    public void leggiDatidaDB() throws SQLException, ClassNotFoundException, MyException {
         UtenteDAO.load(this);
     }
     
-    public void inserisciDatisuDB() throws SQLException, ClassNotFoundException {
+    public void inserisciDatisuDB() throws SQLException, ClassNotFoundException, MyException {
         UtenteDAO.insert(this);
     }
     
-    public void aggiornaDatisuDB() throws SQLException, ClassNotFoundException {
+    public void aggiornaDatisuDB() throws SQLException, ClassNotFoundException, MyException {
         UtenteDAO.update(this);
     }
     
-    public void cancellaDatisuDB() throws SQLException, ClassNotFoundException {
+    public void cancellaDatisuDB() throws SQLException, ClassNotFoundException, MyException {
         UtenteDAO.delete(this);
     }
 }

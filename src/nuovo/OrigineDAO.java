@@ -15,22 +15,21 @@ import java.sql.SQLException;
  *
  * @author daniele
  */
-public class UtenteDAO {
+public class OrigineDAO {
     
-    private UtenteDAO() {}
+    private OrigineDAO() {}
     
-    private static final String INSERT_SQL="INSERT INTO UTENTE VALUES (?, ?, ?)";
+    private static final String INSERT_SQL="INSERT INTO ORIGINE VALUES (?, ?)";
     
-    public static void insert(Utente utente) throws MyException {
+    public static void insert(Origine origine) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
         
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(INSERT_SQL);
-            pstmt.setString(1, utente.getUsername());
-            pstmt.setString(2, utente.getEmail());
-            pstmt.setString(3, utente.getPassword());
+            pstmt.setString(1, origine.getPianta_default().getNome());
+            pstmt.setString(2, origine.getLuogo().getNome());
             pstmt.executeUpdate();
         }
         catch(ClassNotFoundException ex){
@@ -60,19 +59,18 @@ public class UtenteDAO {
     }
     
     //Comando SQL per l’ottenimento di una nuova istanza
-    private static final String FIND_BY_NAME ="SELECT * FROM UTENTE WHERE USERNAME = ?";
-    public static void load(Utente utente) throws MyException {
+    private static final String FIND_BY_NAME ="SELECT * FROM ORIGINE WHERE PIANTA_DEFAULT = ?";
+    public static void load(Origine origine) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
         ResultSet rs=null;
         try {
             con = ConnectionManager.getConnection();
             pstmt = con.prepareStatement(FIND_BY_NAME);
-            pstmt.setString(1, utente.getUsername());
+            pstmt.setString(1, origine.getPianta_default().getNome());
             rs=pstmt.executeQuery();
             rs.next();
-            utente.SetPassword(rs.getString("PASSWORD"));
-            utente.setEmail(rs.getString("EMAIL"));
+            origine.setLuogo((Luogo)rs.getObject("LUOGO"));
         }
          catch(ClassNotFoundException ex){
             throw new MyException("Errore: DRIVER NON TROVATO");
@@ -102,17 +100,16 @@ public class UtenteDAO {
     }
     
     //Comando SQL per l’aggiornamento di una nuova istanza
-    private static final String UPDATE_BY_NAME = "UPDATE UTENTE SET USERNAME=?,EMAIL=?,PASSWORD=?";
-    public static void update(Utente utente) throws MyException {
+    private static final String UPDATE_BY_NAME = "UPDATE ORIGINE SET PIANTA_DEFAULT=?,LUOGO=?";
+    public static void update(Origine origine) throws MyException {
     Connection con=null;
     PreparedStatement pstmt=null;
     ResultSet rs=null;
     try {
         con = ConnectionManager.getConnection();
         pstmt = con.prepareStatement(UPDATE_BY_NAME);
-        pstmt.setString(1,utente.getUsername());
-        pstmt.setString(2, utente.getEmail());
-        pstmt.setString(3, utente.getPassword());
+        pstmt.setString(1, origine.getPianta_default().getNome());
+        pstmt.setString(2, origine.getLuogo().getNome());
         pstmt.executeUpdate();
     }
     catch(ClassNotFoundException ex){
@@ -141,14 +138,14 @@ public class UtenteDAO {
         }
     }
     
-    private static final String DELETE_BY_NAME="DELETE * FROM UTENTE WHERE USERNAME= ?";
-    public static void delete(Utente utente) throws MyException {
+    private static final String DELETE_BY_NAME="DELETE * FROM ORIGINE WHERE PIANTA_DEFAULT= ?";
+    public static void delete(Origine origine) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
         try {
             con=ConnectionManager.getConnection();
             pstmt = con.prepareStatement(DELETE_BY_NAME);
-            pstmt.setString(1, utente.getUsername());
+            pstmt.setString(1, origine.getPianta_default().getNome());
             pstmt.executeUpdate();
         }
         catch(ClassNotFoundException ex){
