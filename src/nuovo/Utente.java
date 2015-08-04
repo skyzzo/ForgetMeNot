@@ -14,7 +14,7 @@ import java.util.Objects;
  *
  * @author daniele
  */
-public class Utente implements Serializable{
+public class Utente implements Serializable {
 
     @Override
     public int hashCode() {
