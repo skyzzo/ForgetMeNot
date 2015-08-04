@@ -10,7 +10,7 @@ package nuovo;
  *
  * @author daniele
  */
-public class PiantaDefault {
+public class PiantaDefault implements Serializable {
    
     private String nome;
     private String tipologia;
@@ -19,6 +19,45 @@ public class PiantaDefault {
     private String foto;
     private String famiglia;
     
+    
+    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PiantaDefault other = (PiantaDefault) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
+    }
+    
+     public void leggiDatidaDB() throws SQLException, ClassNotFoundException, MyException {
+        PiantaDefaultDAO.load(this);
+    }
+    
+    public void inserisciDatisuDB() throws SQLException, ClassNotFoundException, MyException {
+        PiantaDefaultDAO.insert(this);
+    }
+    
+    public void aggiornaDatisuDB() throws SQLException, ClassNotFoundException, MyException {
+        PiantaDefaultDAO.update(this);
+    }
+    
+    public void cancellaDatisuDB() throws SQLException, ClassNotFoundException, MyException {
+        PiantaDefaultDAO.delete(this);
+    }
     
     public PiantaDefault(String nome, String tipologia, String colore_fioritura, String descrizione_acqua, String foto, String famiglia) {
         this.nome = nome;
