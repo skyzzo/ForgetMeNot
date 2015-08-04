@@ -52,7 +52,7 @@ public class PiantaPersonaleDao {
         }
     }
     
-     private static final String FIND_BY_NAME ="SELECT * FROM PIANTAPERSONA WHERE NOME = ?";
+     private static final String FIND_BY_NAME ="SELECT * FROM PIANTAPERSONALE WHERE NOME = ?";
     public static void load(Utente utente) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
@@ -134,7 +134,7 @@ public class PiantaPersonaleDao {
         }
     }
     
-    private static final String DELETE_BY_NAME="DELETE * FROM PIANTAOERSINALE WHERE NOME= ?";
+    private static final String DELETE_BY_NAME="DELETE * FROM PIANTAPERSONALE WHERE NOME= ?";
     public static void delete(PiantaPersonale piantaPersonale) throws MyException {
         Connection con=null;
         PreparedStatement pstmt=null;
