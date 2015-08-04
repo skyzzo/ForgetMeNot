@@ -9,7 +9,7 @@ package nuovo;      /*COMMENTO ALL'INIZIO*/
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Objects;
-
+// ciao danielito
 /**
  *
  * @author daniele
